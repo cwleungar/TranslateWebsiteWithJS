@@ -7,18 +7,10 @@ function applyTranslations() {
 
   // Translate elements with the "translate" class
   document.querySelectorAll('.translate').forEach(element => {
-    const originalText = element.textContent;
     fetch(`/static/${languageCode}/default.json`)
       .then(response => response.json())
       .then(translations => {
-        if (translations[originalText] === undefined ){
-            console.log('No translation found for:', originalText);
-        }
-        else{
-            const translatedText = translations[originalText]
-            element.textContent = translatedText;
-        }
-
+        translate(element,translations);
       })
       .catch(error => {
         console.error('Error loading default translation file:', error);
@@ -34,22 +26,32 @@ function applyTranslations() {
     fetch(`/static/${languageCode}/${filename}.json`)
       .then(response => response.json())
       .then(translations => {
-        const originalText = element.textContent;
-        if (translations[originalText] === undefined ){
-            console.log('No translation found for:', originalText);
-        }
-        else{
-            const translatedText = translations[originalText]
-            element.textContent = translatedText;
-        }
+        translate(element,translations);
       })
-      .catch(error => {
-        console.error(`Error loading translation file for ${filename}:`, error);
-      });
   });
   document.body.classList.add('translations-complete');
 
 }
 
+function translate(element,translations){
+  const originalText = element.textContent.split(',')[0];
+        if (translations[originalText] === undefined ){
+            console.log('No translation found for:', originalText);
+        }
+        else{
+            let translatedText = translations[originalText];
+            const variables = originalText.match(/\$\d+/g);
+            if (variables) {
+              const temp=element.textContent.split(',')
+              variables.forEach((variable, index) => {
+                const value = temp[index + 1];
+                console.log(value);
+                translatedText = translatedText.replace(variable, value);
+              });
+            }
+
+            element.textContent = translatedText;
+        }
+}
 // Call the applyTranslations function when the page is loaded
 window.addEventListener('load', applyTranslations);
