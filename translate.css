@@ -1,0 +1,9 @@
+body:not(.translations-complete) {
+          opacity: 0;
+          visibility: hidden;
+        }
+body.translations-complete {
+          opacity: 1;
+          visibility: visible;
+          transition: opacity 0.3s, visibility 0.3s;
+        }
