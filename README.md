@@ -12,19 +12,30 @@ Can be easily integrated into your existing web application.
 ## Usage
 To use this functionality, follow these steps:
 
-Include the JavaScript code in your HTML file:
+### Include the JavaScript code in your HTML file:
 
 ```
 <script src="translate.js"></script>
 <link rel="stylesheet" href="translate.css">
 ```
 
-Add the translate class to any elements on your page that need to be translated. You can also use a class in the format translate:<language-code> to specify a translation for a specific language.
+Add the translate class to any elements on your page that need to be translated. You can also use a class in the format ```translate:<filename>``` to specify a translation for a specific language.
 ```
 <h1 class="translate">Welcome to our website</h1>
 <p class="translate:es">Bienvenido a nuestro sitio web</p>
 ```
 
+### Configure the translation files
+put the translation json to ```/static/{language code}/{filename}.json ```.
+For all lanugage, the system use default.json as default if no filename is specified in class
+The structure inside the translation json is 
+```
+{
+"original text":"translated text", 
+"original text $1 $2":"translated $1 text $2" // original text Sam John --> translated Sam text John
+}
+```
+### Customise css
 You can customize the appearance and behavior of the translated page switcher by modifying the CSS styles.
 
 You can also adjust the transition duration and other styling properties as needed.
