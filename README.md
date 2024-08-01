@@ -12,6 +12,9 @@ Can be easily integrated into your existing web application.
 ## Usage
 To use this functionality, follow these steps:
 
+### Website url settings:
+The url should be in format https://domain.com/{langauage code}/path
+
 ### Include the JavaScript code in your HTML file:
 
 ```
