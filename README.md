@@ -35,7 +35,7 @@ The structure inside the translation json is
 ```
 {
 "original text":"translated text", 
-"original text $1 $2":"translated $1 text $2" // <p>original text $1 $2,Sam,John</p> --> translated Sam text John
+"original text $1 $2":"translated $1 text $2" // <p>original text $1 $2;Sam;John</p> --> translated Sam text John
 }
 ```
 ### Customise css
